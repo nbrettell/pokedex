@@ -6,7 +6,13 @@ type Pokemon = {
   height: Number,
   default: Boolean,
   weight: Number,
-  order: Number
+  order: Number,
+  image: String
+}
+
+const getPokemonImage = (image: Object<any>) => {
+    const value = image.other.home.front_default
+    return value
 }
 
 export async function getPokemon(name: string) {
@@ -29,6 +35,7 @@ export default async function handler(
         height: jsonData.height,
         default: jsonData.is_default,
         weight: jsonData.weight,
-        order: jsonData.order
+        order: jsonData.order,
+        image: getPokemonImage(jsonData.sprites)
     })
   }
