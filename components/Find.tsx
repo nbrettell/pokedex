@@ -12,34 +12,18 @@ import { Option } from 'react-bootstrap-typeahead/types/types';
 // Import as a module in your JS
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-type Search = {
-  isLoading: Boolean,
-  selected: Option
-}
-
-type Pokemon = {
-  name: String
-}
-
 interface PokemonSelectorProps {
-    onPokemonChanged: ((selected: Pokemon) => void)
+    onPokemonChanged: ((selected: Option[]) => void)
+}
+
+type PokemonItem = {
+  name: string
 }
 
 const Find = ({onPokemonChanged}: PokemonSelectorProps) => {
-  const [selected, setSearchTerm] = React.useState<Search>()
-  const [pokemons, setPokemons] = React.useState<any>([])
+  const [pokemons, setPokemons] = React.useState<Array<PokemonItem>>()
 
   const pokemonService = new PokemonService()
-
-  const onSearch = (query: Option[]): void => {
-    setSearchTerm({
-      isLoading: true,
-      selected: query,
-    })
-    setTimeout(() => {
-      setSearchTerm({ isLoading: false, selected: query });
-    }, 2000);
-  };
 
   React.useEffect(() => {
     // ResetIsLoading(true)
@@ -63,14 +47,14 @@ const Find = ({onPokemonChanged}: PokemonSelectorProps) => {
     <div>
       <Typeahead
         id="find-pokemon"
-        options={pokemons}
+        options={pokemons!}
         labelKey="name"
         placeholder="Choose a pokemon..."
         onChange={onPokemonChanged}
         renderMenu={(results, menuProps) => (
-          <Menu text="some" {...menuProps}>
-            {results.map((result, index) => (
-              <MenuItem option={result} position={index}>
+          <Menu text="Pokemon Search" {...menuProps}>
+            {results.map((result: Option, index) => (
+              <MenuItem option={result} position={index} key={index}>
                 {result.name}
               </MenuItem>
             ))}
