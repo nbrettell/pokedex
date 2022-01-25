@@ -1,21 +1,16 @@
-// components/Find/index.tsx
+// components/Pokemon.tsx
 
 import * as React from 'react'
 import Find from './Find'
 import Character from './Character'
-
-type Pokemon = {
-  name: String
-}
+import { Option } from 'react-bootstrap-typeahead/types/types';
 
 const PokemonMain = () => {
-    const [pokemon, setPokemon] = React.useState<String>()
-    const selectPokemon = (value: String) => {
+    const [pokemon, setPokemon] = React.useState<string>()
+    const selectPokemon = (value: Option[]) => {
         const item = Object.assign({}, ...value)
         setPokemon(item.name)
     }
-
-    console.log('pokemon main = ', pokemon)
 
     return (
         <section className="pokemon my-5">
@@ -24,7 +19,7 @@ const PokemonMain = () => {
                 pokemon && <Character item={pokemon} />
             }
             {
-                !pokemon && <div>NOThing</div>
+                !pokemon && <div className='my-3'>No Pokemon selected...</div>
             }
         </section>
     )

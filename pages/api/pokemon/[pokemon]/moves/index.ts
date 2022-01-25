@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 type PokemonMove = {
-    name: String
+    name: string
 }
 
 type PokemonMoves = {

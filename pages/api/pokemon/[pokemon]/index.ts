@@ -1,17 +1,21 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 type Pokemon = {
-  name: String,
-  experience: Number,
-  height: Number,
-  default: Boolean,
-  weight: Number,
-  order: Number,
-  image: String
+  name: string,
+  experience: number,
+  height: number,
+  default: boolean,
+  weight: number,
+  order: number,
+  image: string
 }
 
-const getPokemonImage = (image: Object<any>) => {
-    const value = image.other.home.front_default
+type PokemonImage = {
+    front_default: string
+}
+
+const getPokemonImage = (image: PokemonImage) => {
+    const value = image.front_default
     return value
 }
 
@@ -36,6 +40,6 @@ export default async function handler(
         default: jsonData.is_default,
         weight: jsonData.weight,
         order: jsonData.order,
-        image: getPokemonImage(jsonData.sprites)
+        image: getPokemonImage(jsonData.sprites.other.home)
     })
   }

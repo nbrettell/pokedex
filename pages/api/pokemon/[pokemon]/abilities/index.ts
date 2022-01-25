@@ -1,13 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 type PokemonAbility = {
-    ability: Object,
-    is_hidden: Boolean,
-    slot: Number
+    ability: Array<Ability>,
+    is_hidden: boolean,
+    slot: number
 }
 
 type PokemonData = {
     abilities: Array<PokemonAbility>
+}
+
+type Ability = {
+  name: string,
+  url: string
 }
 
 export async function getPokemon(name: string) {
