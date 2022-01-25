@@ -2,10 +2,7 @@
 
 import * as React from 'react'
 import { PokemonService } from '../services/pokemon.service';
-import { 
-  Typeahead,
-  Menu,
-  MenuItem } from 'react-bootstrap-typeahead';
+import { Typeahead } from 'react-bootstrap-typeahead';
 import { Option } from 'react-bootstrap-typeahead/types/types';
 
 
@@ -51,15 +48,6 @@ const Find = ({onPokemonChanged}: PokemonSelectorProps) => {
         labelKey="name"
         placeholder="Choose a pokemon..."
         onChange={onPokemonChanged}
-        renderMenu={(results, menuProps) => (
-          <Menu text="Pokemon Search" {...menuProps}>
-            {results.map((result: Option, index) => (
-              <MenuItem option={result} position={index} key={index}>
-                {result.name}
-              </MenuItem>
-            ))}
-          </Menu>
-        )}
       />
     </div>
   )
